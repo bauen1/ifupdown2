@@ -678,8 +678,8 @@ class iface():
     def dump_raw(self, logger):
         indent = '  '
         if self.auto:
-            print 'auto %s' %self.name
-        print (self.raw_config[0])
+            print('auto {0}'.format(self.name))
+        print(self.raw_config[0])
         for i in range(1, len(self.raw_config)):
             print(indent + self.raw_config[i])
 
@@ -746,7 +746,7 @@ class iface():
             if self.status == ifaceStatus.NOTFOUND:
                 outbuf = (outbuf.encode('utf8')
                     if isinstance(outbuf, unicode) else outbuf)
-                print outbuf + '\n'
+                print(outbuf + '\n')
                 return
         else:
             outbuf += ifaceline + '\n'
@@ -773,7 +773,7 @@ class iface():
         if with_status:
             outbuf = (outbuf.encode('utf8')
                         if isinstance(outbuf, unicode) else outbuf)
-        print outbuf
+        print(outbuf)
 
     def dump_pretty(self, with_status=False, use_realname=False):
         if not self.addr_family:

@@ -25,8 +25,8 @@ def profile(func):
     def wrap(*args, **kwargs):
         started_at = time.time()
         result = func(*args, **kwargs)
-        print str(func)
-        print (time.time() - started_at)
+        print(str(func))
+        print(time.time() - started_at)
         return result
     return wrap
 

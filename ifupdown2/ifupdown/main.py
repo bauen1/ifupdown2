@@ -82,7 +82,7 @@ class Ifupdown2:
             if log:
                 log.error(str(e))
             else:
-                print str(e)
+                print(str(e))
                 # if args and not args.debug:
                 #    print '\nrerun the command with \'-d\' for a detailed errormsg'
             return 1

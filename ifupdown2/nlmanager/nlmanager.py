@@ -511,7 +511,7 @@ class NetlinkManager(object):
         """
         Print a table of 'routes'
         """
-        print "Prefix            Nexthop           ifindex"
+        print("Prefix            Nexthop           ifindex")
 
         for x in routes:
             if Route.RTA_DST not in x.attributes:
@@ -519,10 +519,10 @@ class NetlinkManager(object):
                 continue
 
             ip = "%s/%d" % (x.attributes[Route.RTA_DST].value, x.src_len)
-            print "%-15s   %-15s   %s" %\
+            print("%-15s   %-15s   %s" %\
                 (ip,
                  str(x.attributes[Route.RTA_GATEWAY].value) if Route.RTA_GATEWAY in x.attributes else None,
-                 x.attributes[Route.RTA_OIF].value)
+                 x.attributes[Route.RTA_OIF].value))
 
     # =====
     # Links
@@ -739,7 +739,7 @@ class NetlinkManager(object):
             Link.IFLA_XFRM_IF_ID: int(xfrm_id),
             Link.IFLA_XFRM_LINK: int(physdev)
         }
-        
+
         return self._link_add(ifindex=None, ifname=xfrm_ifname, kind='xfrm', ifla_info_data=ifla_info_data)
 
     def vlan_get(self, filter_ifindex=None, filter_vlanid=None, compress_vlans=True):
@@ -820,8 +820,8 @@ class NetlinkManager(object):
         range_begin_vlan_id = None
         range_flag = None
 
-        print "   Interface  VLAN  Flags"
-        print "  ==========  ====  ====="
+        print("   Interface  VLAN  Flags")
+        print("  ==========  ====  =====")
 
         for (ifname, vlan_tuples) in sorted(iface_vlans.iteritems()):
             for (vlan_id, vlan_flag) in sorted(vlan_tuples):
@@ -838,14 +838,14 @@ class NetlinkManager(object):
                         range_begin_vlan_id = vlan_id
 
                     for x in xrange(range_begin_vlan_id, vlan_id + 1):
-                        print "  %10s  %4d  %s" % (ifname, x, vlan_flag_to_string(vlan_flag))
+                        print("  %10s  %4d  %s" % (ifname, x, vlan_flag_to_string(vlan_flag)))
                         ifname = ''
 
                     range_begin_vlan_id = None
                     range_flag = None
 
                 else:
-                    print "  %10s  %4d  %s" % (ifname, vlan_id, vlan_flag_to_string(vlan_flag))
+                    print("  %10s  %4d  %s" % (ifname, vlan_id, vlan_flag_to_string(vlan_flag)))
                     ifname = ''
 
 

@@ -128,7 +128,7 @@ class networkInterfaces():
         """
 
         if callback_name not in self.callbacks.keys():
-            print 'warning: invalid callback ' + callback_name
+            print('warning: invalid callback {0}'.format(callback_name))
             return -1
 
         self.callbacks[callback_name] = callback_func

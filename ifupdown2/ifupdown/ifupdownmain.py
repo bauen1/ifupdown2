@@ -520,7 +520,7 @@ class ifupdownMain(ifupdownBase):
         if (self.flags.CHECK_SHARED_DEPENDENTS and
             (ifaceobj.role & ifaceRole.SLAVE) and
             (role == ifaceRole.SLAVE) and (upperifaceobj.role & ifaceRole.MASTER)):
-		self.logger.error("misconfig..? %s %s is enslaved to multiple interfaces %s"
+                self.logger.error("misconfig..? %s %s is enslaved to multiple interfaces %s"
                                   %(ifaceobj.name,
                                     ifaceLinkPrivFlags.get_all_str(ifaceobj.link_privflags), str(ifaceobj.upperifaces)))
                 ifaceobj.set_status(ifaceStatus.ERROR)
@@ -1366,7 +1366,7 @@ class ifupdownMain(ifupdownBase):
                         'mhelp': value._modinfo['mhelp'],
                         'attrs': value.merge_modinfo_with_policy_files()
                     }
-            print json.dumps(modinfos)
+            print(json.dumps(modinfos))
         else:
             indent = '  '
             for m, mdict in self.module_attrs.items():
@@ -1403,12 +1403,12 @@ class ifupdownMain(ifupdownBase):
                         if not examples:
                             continue
 
-                        print '%sexample:' %(indent + '  ')
+                        print('{0}example:'.format(indent + '  '))
                         for e in examples:
-                            print '%s%s' %(indent + '    ', e)
+                            print('{0}{1}'.format(indent + '    ', e))
                 except:
                     pass
-                print ''
+                print('')
 
     def load_scripts(self, modules_dir):
         """ loading user modules from /etc/network/.
@@ -2259,7 +2259,7 @@ class ifupdownMain(ifupdownBase):
             ifacenames = self.ifaceobjdict.keys()
         if format == 'list':
             for k,v in self.dependency_graph.items():
-                print '%s : %s' %(k, str(v))
+                print('{0} : {1}'.format(k, str(v)))
         elif format == 'dot':
             indegrees = {}
             map(lambda i: indegrees.update({i :
@@ -2269,7 +2269,7 @@ class ifupdownMain(ifupdownBase):
 
     def print_ifaceobjs_list(self, ifacenames):
         for i in ifacenames:
-            print i
+            print(i)
 
     def print_ifaceobjs_raw(self, ifacenames):
         """ prints raw lines for ifaces from config file """
@@ -2309,8 +2309,8 @@ class ifupdownMain(ifupdownBase):
         self._get_ifaceobjs_pretty(ifacenames, ifaceobjs)
         if not ifaceobjs: return
         if format == 'json':
-            print json.dumps(ifaceobjs, cls=ifaceJsonEncoder,
-                             indent=4, separators=(',', ': '))
+            print(json.dumps(ifaceobjs, cls=ifaceJsonEncoder,
+                             indent=4, separators=(',', ': ')))
         else:
             expand = int(self.config.get('ifquery_ifacename_expand_range', '0'))
             for i in ifaceobjs:
@@ -2357,8 +2357,8 @@ class ifupdownMain(ifupdownBase):
         ifaceStatusUserStrs.ERROR = self.config.get('ifquery_check_error_str', _error_sym)
         ifaceStatusUserStrs.UNKNOWN = self.config.get('ifquery_check_unknown_str', '')
         if format == 'json':
-            print json.dumps(ifaceobjs, cls=ifaceJsonEncoderWithStatus,
-                             indent=2, separators=(',', ': '))
+            print(json.dumps(ifaceobjs, cls=ifaceJsonEncoderWithStatus,
+                             indent=2, separators=(',', ': ')))
         else:
             map(lambda i: i.dump_pretty(with_status=True), ifaceobjs)
         return ret
@@ -2370,19 +2370,19 @@ class ifupdownMain(ifupdownBase):
         self._get_ifaceobjs_pretty(ifacenames, ifaceobjs, running=True)
         if not ifaceobjs: return
         if format == 'json':
-            print json.dumps(ifaceobjs, cls=ifaceJsonEncoder, indent=2,
-                       separators=(',', ': '))
+            print(json.dumps(ifaceobjs, cls=ifaceJsonEncoder, indent=2,
+                       separators=(',', ': ')))
         else:
             map(lambda i: i.dump_pretty(), ifaceobjs)
 
     def _dump(self):
-        print 'ifupdown main object dump'
-        print self.pp.pprint(self.modules)
-        print self.pp.pprint(self.ifaceobjdict)
+        print('ifupdown main object dump')
+        print(self.pp.pprint(self.modules))
+        print(self.pp.pprint(self.ifaceobjdict))
 
     def _dump_ifaceobjs(self, ifacenames):
         for i in ifacenames:
             ifaceobjs = self.get_ifaceobjs(i)
             for i in ifaceobjs:
                 i.dump(self.logger)
-                print '\n'
+                print('\n')
