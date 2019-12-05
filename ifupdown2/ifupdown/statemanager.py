@@ -8,7 +8,7 @@
 #
 
 import os
-import cPickle
+import pickle
 import logging
 
 try:
@@ -32,7 +32,7 @@ class pickling():
         try:
             with open(filename, 'w') as f:
                 for obj in list_of_objects:
-                    cPickle.dump(obj, f, cPickle.HIGHEST_PROTOCOL)
+                    pickle.dump(obj, f, pickle.HIGHEST_PROTOCOL)
         except:
             raise
 
@@ -40,7 +40,7 @@ class pickling():
     def save_obj(cls, f, obj):
         """ pickle iface object """
         try:
-            cPickle.dump(obj, f, cPickle.HIGHEST_PROTOCOL)
+            pickle.dump(obj, f, pickle.HIGHEST_PROTOCOL)
         except:
             raise
 
@@ -49,7 +49,7 @@ class pickling():
         """ load picked iface object """
         with open(filename, 'r') as f:
             while True:
-                try: yield cPickle.load(f)
+                try: yield pickle.load(f)
                 except EOFError: break
                 except: raise
 
