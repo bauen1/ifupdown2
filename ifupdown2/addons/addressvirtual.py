@@ -8,7 +8,7 @@ import os
 import glob
 
 from collections import deque
-from ipaddr import IPNetwork, IPv6Network
+from ipaddress import IPv6Network, ip_network
 
 try:
     from ifupdown2.ifupdown.iface import *
@@ -173,7 +173,7 @@ class addressvirtual(moduleBase):
         #
         try:
             self.logger.info('%s: checking route entry ...' %ifaceobj.name)
-            ip = IPNetwork(addr)
+            ip = ip_network(addr)
 
             # we don't support ip6 route fix yet
             if type(ip) == IPv6Network:

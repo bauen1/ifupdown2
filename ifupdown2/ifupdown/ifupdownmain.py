@@ -11,7 +11,7 @@ import pprint
 
 from collections import OrderedDict
 
-from ipaddr import IPNetwork, IPv4Network, IPv6Network, IPAddress, IPv4Address, IPv6Address
+from ipaddress import IPv4Network, IPv6Network, IPv4Address, IPv6Network, ip_network, ip_address
 
 try:
     import ifupdown2.ifupdownaddons.cache
@@ -848,10 +848,10 @@ class ifupdownMain(ifupdownBase):
         return self._keyword_check_list(value.split(), IPv6Network, limit=1)
 
     def _keyword_ip(self, value, validrange=None):
-        return self._keyword_check_list(value.split(), IPAddress, limit=1)
+        return self._keyword_check_list(value.split(), ip_address, limit=1)
 
     def _keyword_ip_prefixlen(self, value, validrange=None):
-        return self._keyword_check_list(value.split(), IPNetwork, limit=1)
+        return self._keyword_check_list(value.split(), ip_network, limit=1)
 
     def _keyword_mac_ip_prefixlen_list(self, value, validrange=None):
         """

@@ -30,7 +30,7 @@
 
 import logging
 import struct
-from ipaddr import IPv4Address, IPv6Address, IPAddress
+from ipaddress import IPv4Address, IPv6Address, ip_address
 from binascii import hexlify
 from pprint import pformat
 from socket import AF_UNSPEC, AF_INET, AF_INET6, AF_BRIDGE, htons
@@ -483,7 +483,7 @@ class AttributeIPAddress(Attribute):
         if value is None:
             self.value = None
         else:
-            self.value = IPAddress(value)
+            self.value = ip_address(value)
 
     def decode(self, parent_msg, data):
         self.decode_length_type(data)

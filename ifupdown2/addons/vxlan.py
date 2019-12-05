@@ -5,7 +5,7 @@
 #
 
 
-from ipaddr import IPNetwork, IPv4Address, IPv4Network, AddressValueError
+from ipaddress import IPv4Address, IPv4Network, AddressValueError, ip_network
 
 try:
     import ifupdown2.ifupdown.policymanager as policymanager
@@ -110,7 +110,7 @@ class vxlan(moduleBase):
 
     def syntax_check_localip_anycastip_equal(self, ifname, local_ip, anycast_ip):
         try:
-            if IPNetwork(local_ip) == IPNetwork(anycast_ip):
+            if ip_network(local_ip) == ip_network(anycast_ip):
                 self.logger.warning('%s: vxlan-local-tunnelip and clagd-vxlan-anycast-ip are identical (%s)'
                                     % (ifname, local_ip))
                 return False

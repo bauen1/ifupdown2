@@ -14,7 +14,7 @@ import socket
 import subprocess
 
 from string import maketrans
-from ipaddr import IPNetwork, IPv6Network
+from ipaddress import IPv6Network, ip_network
 
 try:
     import ifupdown2.ifupdown.statemanager as statemanager

@@ -8,7 +8,7 @@ import os
 import glob
 import socket
 
-from ipaddr import IPNetwork, IPv6Network
+from ipaddress import IPv6Network, ip_network
 
 try:
     from ifupdown2.ifupdown.iface import *

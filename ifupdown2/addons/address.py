@@ -6,7 +6,7 @@
 
 import socket
 
-from ipaddr import IPNetwork, IPv4Network, IPv6Network, _BaseV6
+from ipaddress import IPv4Network, IPv6Network, _BaseV6, ip_network
 
 try:
     from ifupdown2.ifupdown.iface import *
@@ -238,7 +238,7 @@ class address(moduleBase):
         return True
 
     def _syntax_check_multiple_gateway(self, family, found, addr, type_obj):
-        if type(IPNetwork(addr)) == type_obj:
+        if type(ip_network(addr)) == type_obj:
             if found:
                 raise Exception('%s: multiple gateways for %s family'
                                 % (addr, family))
