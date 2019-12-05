@@ -73,7 +73,7 @@ class Ifupdown2:
             self.read_config()
             self.init(stdin_buffer)
             self.handlers.get(self.op)(self.args)
-        except Exception, e:
+        except Exception as e:
             if not str(e):
                 return 1
                 # if args and args.debug:

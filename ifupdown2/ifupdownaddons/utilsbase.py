@@ -45,7 +45,7 @@ class utilsBase(object):
                 return 0
             with open(filename, 'w') as f:
                 f.write(strexpr)
-        except IOError, e:
+        except IOError as e:
             self.logger.warn('error writing to file %s'
                 %filename + '(' + str(e) + ')')
             return -1

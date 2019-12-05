@@ -300,7 +300,7 @@ class LinkUtils(utilsBase):
 
                 # battrs['mciqc'] = broutlines[11].split('mc init query count')[1].strip()
                 # battrs['mclmt'] = broutlines[13].split('mc last member timer')[1].split()[0].strip()
-        except Exception, e:
+        except Exception as e:
             self.logger.warn('%s: error while processing bridge attributes: %s' % (bridgename, str(e)))
             pass
 
@@ -335,7 +335,7 @@ class LinkUtils(utilsBase):
                 #bportattrs['mc fast leave'] = self.read_file_oneline(
                 #    '/sys/class/net/%s/brport/multicast_fast_leave' % pname)								
 
-            except Exception, e:
+            except Exception as e:
                 self.logger.warn('%s: error while processing bridge attributes: %s' % (bridgename, str(e)))
             bports[pname] = bportattrs
             linkCache.update_attrdict([bridgename, 'linkinfo', 'ports'], bports)
@@ -371,7 +371,7 @@ class LinkUtils(utilsBase):
                 try:
                     v = int(n) / 100
                     mcattrs[m] = str(v)
-                except Exception, e:
+                except Exception as e:
                     self.logger.warn('error getting mc attr %s (%s)' % (m, str(e)))
                     pass
             else:
@@ -735,7 +735,7 @@ class LinkUtils(utilsBase):
                 self._link_fill(attrlist[0], refresh)
                 self._addr_fill(attrlist[0], refresh)
             return linkCache.get_attr(attrlist)
-        except Exception, e:
+        except Exception as e:
             self.logger.debug('_cache_get(%s) : [%s]' % (str(attrlist), str(e)))
         return None
 
@@ -745,7 +745,7 @@ class LinkUtils(utilsBase):
     def _cache_check(self, t, attrlist, value, refresh=False):
         try:
             return self._cache_get(t, attrlist, refresh) == value
-        except Exception, e:
+        except Exception as e:
             self.logger.debug('_cache_check(%s) : [%s]'
                               % (str(attrlist), str(e)))
         return False
@@ -1045,12 +1045,12 @@ class LinkUtils(utilsBase):
                     self.del_addr_all(ifacename)
                 else:
                     self.del_addr_all(ifacename, addrs)
-            except Exception, e:
+            except Exception as e:
                 self.logger.warning('%s: %s' % (ifacename, str(e)))
         for a in addrs:
             try:
                 self.addr_add(ifacename, a, metric=metric)
-            except Exception, e:
+            except Exception as e:
                 self.logger.error(str(e))
 
     def _link_set_ifflag(self, ifacename, value):
@@ -1580,7 +1580,7 @@ class LinkUtils(utilsBase):
         if not bridgeout: return brvlaninfo
         try:
             vlan_json = json.loads(bridgeout, encoding="utf-8")
-        except Exception, e:
+        except Exception as e:
             self.logger.info('json loads failed with (%s)' % str(e))
             return {}
 
@@ -1859,7 +1859,7 @@ class LinkUtils(utilsBase):
                 if rline:
                     rattrs = rline.split()
                     return rattrs[rattrs.index('dev') + 1]
-        except Exception, e:
+        except Exception as e:
             self.logger.debug('ip_route_get_dev: failed .. %s' % str(e))
         return None
 
@@ -1933,7 +1933,7 @@ class LinkUtils(utilsBase):
     def _link_cache_check(self, attrlist, value, refresh=False):
         try:
             return self._link_cache_get(attrlist, refresh) == value
-        except Exception, e:
+        except Exception as e:
             self.logger.debug('_cache_check(%s) : [%s]'
                               % (str(attrlist), str(e)))
             pass
@@ -1986,7 +1986,7 @@ class LinkUtils(utilsBase):
                                                True)):
                     self.write_file('/sys/class/net/%s/bonding/%s'
                                     % (bondname, attrname), attrval)
-            except Exception, e:
+            except Exception as e:
                 if ifupdownflags.flags.FORCE:
                     self.logger.warn(str(e))
                     pass
@@ -2198,13 +2198,13 @@ class LinkUtils(utilsBase):
         try:
             with open(sysfs_bond_path, 'r') as f:
                 slaves = f.readline().strip().split()
-        except IOError, e:
+        except IOError as e:
             raise Exception('error reading slaves of bond %s (%s)' % (bondname, str(e)))
         for slave in slaves:
             self.link_down(slave)
             try:
                 self.bond_remove_slave(bondname, slave)
-            except Exception, e:
+            except Exception as e:
                 if not ifupdownflags.flags.FORCE:
                     raise Exception('error removing slave %s from bond %s (%s)' % (slave, bondname, str(e)))
                 else:
@@ -2357,7 +2357,7 @@ class LinkUtils(utilsBase):
                     cmd = ('%s set%s %s %s' %
                            (utils.brctl_cmd, k, bridgename, v))
                     utils.exec_command(cmd)
-            except Exception, e:
+            except Exception as e:
                 self.logger.warn('%s: %s' % (bridgename, str(e)))
                 pass
 

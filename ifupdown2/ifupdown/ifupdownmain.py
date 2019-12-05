@@ -296,7 +296,7 @@ class ifupdownMain(ifupdownBase):
             self.statemanager = statemanager.statemanager_api
             try:
                 self.statemanager.read_saved_state()
-            except Exception, e:
+            except Exception as e:
                 # if read_saved_state fails, state file might be corrupt.
                 # Ignore old state and continue
                 self.logger.warning('error reading state (%s)' %str(e))
@@ -635,7 +635,7 @@ class ifupdownMain(ifupdownBase):
                         continue
                     dlist = module.get_dependent_ifacenames(ifaceobj,
                                         ifacenames)
-            except Exception, e:
+            except Exception as e:
                 self.logger.warn('%s: error getting dependent interfaces (%s)'
                         %(ifaceobj.name, str(e)))
                 dlist = None
@@ -659,7 +659,7 @@ class ifupdownMain(ifupdownBase):
                     if (not hasattr(module, 'get_upper_ifacenames')):
                         continue
                     ulist = module.get_upper_ifacenames(ifaceobj, ifacenames)
-            except Exception, e:
+            except Exception as e:
                 self.logger.warn('%s: error getting upper interfaces (%s)'
                                  %(ifaceobj.name, str(e)))
                 ulist = None
@@ -1209,7 +1209,7 @@ class ifupdownMain(ifupdownBase):
                         if not module.syntax_check(self.get_ifaceobjs(ifacename)[0],
                                                    self.get_ifaceobjs):
                             result = False
-                except Exception, e:
+                except Exception as e:
                     self.logger.warn('%s: %s' % (ifacename, str(e)))
                     result = False
         return result
@@ -1294,7 +1294,7 @@ class ifupdownMain(ifupdownBase):
                     operation = litems[0]
                     mname = litems[1]
                     self.module_ops[operation].append(mname)
-                except Exception, e:
+                except Exception as e:
                     self.logger.warn('error reading line \'%s\' %s:' %(l, str(e)))
                     continue
 
@@ -1330,7 +1330,7 @@ class ifupdownMain(ifupdownBase):
                                 minstance = mclass()
                                 script_override = minstance.get_overrides_ifupdown_scripts()
                                 self.overridden_ifupdown_scripts.extend(script_override)
-                            except moduleNotSupported, e:
+                            except moduleNotSupported as e:
                                 self.logger.info('module %s not loaded (%s)\n'
                                                  %(mname, str(e)))
                                 continue
@@ -1580,7 +1580,7 @@ class ifupdownMain(ifupdownBase):
         try:
             # Update persistant iface states
             self.statemanager.save_state()
-        except Exception, e:
+        except Exception as e:
             if self.logger.isEnabledFor(logging.DEBUG):
                 t = sys.exc_info()[2]
                 traceback.print_tb(t)
@@ -1607,7 +1607,7 @@ class ifupdownMain(ifupdownBase):
             try:
                 if self.link_exists(i):
                    func(i)
-            except Exception, e:
+            except Exception as e:
                 self.logger.warn(str(e))
                 pass
 
@@ -1736,7 +1736,7 @@ class ifupdownMain(ifupdownBase):
             # If no old state available
             try:
                 self.read_iface_config()
-            except Exception, e:
+            except Exception as e:
                 raise Exception('error reading iface config (%s)' %str(e))
         filtered_ifacenames = None
         if ifacenames:
@@ -1748,7 +1748,7 @@ class ifupdownMain(ifupdownBase):
                if allow_classes:
                    filtered_ifacenames = self._get_filtered_ifacenames_with_classes(auto, allow_classes, excludepats, ifacenames)
 
-            except Exception, e:
+            except Exception as e:
                raise Exception('%s' %str(e) +
                        ' (interface was probably never up ?)')
 
@@ -2043,7 +2043,7 @@ class ifupdownMain(ifupdownBase):
                 self.flags.CHECK_SHARED_DEPENDENTS = False
                 self.populate_dependency_info(upops)
                 self.flags.CHECK_SHARED_DEPENDENTS = True
-            except Exception, e:
+            except Exception as e:
                 self.logger.info("error generating dependency graph for "
                                  "saved interfaces (%s)" %str(e))
                 pass
@@ -2186,7 +2186,7 @@ class ifupdownMain(ifupdownBase):
                     self._sched_ifaces(ifacedownlist, downops,
                                        followdependents=False,
                                        sort=True)
-                except Exception, e:
+                except Exception as e:
                     self.logger.error(str(e))
                     pass
                 finally:
@@ -2216,7 +2216,7 @@ class ifupdownMain(ifupdownBase):
                                      followdependents=True
                                      if ifupdownflags.flags.WITH_DEPENDS
                                      else False)
-        except Exception, e:
+        except Exception as e:
             ret = None
             self.logger.error(str(e))
         finally:

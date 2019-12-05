@@ -451,7 +451,7 @@ class networkInterfaces():
                     self._currentfile_has_template = False
                 else:
                     self._currentfile_has_template = True
-            except Exception, e:
+            except Exception as e:
                 self._parse_error(self._currentfile, -1,
                                   'failed to render template (%s). Continue without template rendering ...'
                                   % str(e))
@@ -470,7 +470,7 @@ class networkInterfaces():
         try:
             with open(filename) as f:
                 filedata = f.read()
-        except Exception, e:
+        except Exception as e:
             self.logger.warn('error processing file %s (%s)',
                              filename, str(e))
             return

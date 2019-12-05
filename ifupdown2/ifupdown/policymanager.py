@@ -54,7 +54,7 @@ class policymanager():
                     system_array = json.load(fd)
                 self.logger.debug('reading %s system policy defaults config' \
                                   % filename)
-            except Exception, e:
+            except Exception as e:
                 self.logger.warning('could not read %s system policy defaults config' \
                                   % filename)
                 self.logger.warning('    exception is %s' % str(e))
@@ -75,7 +75,7 @@ class policymanager():
                     user_array = json.load(fd)
                 self.logger.debug('reading %s policy user defaults config' \
                                   % filename)
-            except Exception, e:
+            except Exception as e:
                 self.logger.warning('could not read %s user policy defaults config' \
                                   % filename)
                 self.logger.warning('    exception is %s' % str(e))

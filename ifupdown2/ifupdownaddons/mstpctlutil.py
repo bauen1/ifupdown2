@@ -174,7 +174,7 @@ class mstpctlutil(utilsBase):
         try:
             bridgeattrs = dict((k, self.get_bridge_attr(bridgename, v))
                                  for k,v in self._bridge_jsonAttr_map.items())
-        except Exception, e:
+        except Exception as e:
             self.logger.debug(bridgeattrs)
             self.logger.debug(str(e))
             pass
@@ -212,7 +212,7 @@ class mstpctlutil(utilsBase):
                 continue
             try:
                 self.set_bridge_attr(bridgename, k, v, check)
-            except Exception, e:
+            except Exception as e:
                 self.logger.warn('%s: %s' %(bridgename, str(e)))
 
     def get_bridge_treeprio(self, bridgename):
