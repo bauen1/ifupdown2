@@ -8,7 +8,6 @@ import re
 import time
 import itertools
 
-from sets import Set
 from collections import Counter
 
 try:
@@ -1020,7 +1019,7 @@ class bridge(moduleBase):
             return []
         err = 0
         ports = 0
-        newbridgeports = Set(bridgeports).difference(Set(runningbridgeports))
+        newbridgeports = set(bridgeports).difference(set(runningbridgeports))
         newly_enslaved_ports = []
 
         newbridgeports_ordered = []
@@ -1121,14 +1120,14 @@ class bridge(moduleBase):
                        for start, end in self._ints_to_ranges(vids_ints)]
 
     def _diff_vids(self, vids1_ints, vids2_ints):
-        return Set(vids2_ints).difference(vids1_ints), Set(vids1_ints).difference(vids2_ints)
+        return set(vids2_ints).difference(vids1_ints), set(vids1_ints).difference(vids2_ints)
 
     def _compare_vids(self, vids1, vids2, pvid=None):
         """ Returns true if the vids are same else return false """
 
         vids1_ints = self._ranges_to_ints(vids1)
         vids2_ints = self._ranges_to_ints(vids2)
-        set_diff = Set(vids1_ints).symmetric_difference(vids2_ints)
+        set_diff = set(vids1_ints).symmetric_difference(vids2_ints)
         if pvid and int(pvid) in set_diff:
             set_diff.remove(int(pvid))
         if set_diff:
@@ -1151,7 +1150,7 @@ class bridge(moduleBase):
                 k, v = s.split('=')
                 mcqs[k] = v
 
-            k_to_del = Set(running_mcqv4src.keys()).difference(mcqs.keys())
+            k_to_del = set(running_mcqv4src.keys()).difference(mcqs.keys())
             for v in k_to_del:
                 self.brctlcmd.bridge_del_mcqv4src(ifaceobj.name, v)
             for v in mcqs.keys():
@@ -2628,7 +2627,7 @@ class bridge(moduleBase):
         filterattrs = ['bridge-vids', 'bridge-trunk', 'bridge-port-vids',
                        'bridge-port-pvids']
 
-        diff = Set(ifaceattrs).difference(filterattrs)
+        diff = set(ifaceattrs).difference(filterattrs)
 
         if 'bridge-l2protocol-tunnel' in diff:
             diff.remove('bridge-l2protocol-tunnel')

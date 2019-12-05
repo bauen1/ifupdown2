@@ -5,7 +5,6 @@
 #
 
 
-from sets import Set
 from ipaddr import IPNetwork, IPv4Address, IPv4Network, AddressValueError
 
 try:
@@ -451,8 +450,8 @@ class vxlan(moduleBase):
                     ifaceobjcurr.update_config_with_status(attrname, a, 0)
                 else:
                     ifaceobjcurr.update_config_with_status(attrname, a, 1)
-            running_addresses = Set(running_addresses).difference(
-                                                    Set(addresses))
+            running_addresses = set(running_addresses).difference(
+                                                    set(addresses))
         [ifaceobjcurr.update_config_with_status(attrname, a, 1)
                     for a in running_addresses]
 

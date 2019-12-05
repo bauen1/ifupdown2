@@ -8,8 +8,6 @@
 
 import os
 
-from sets import Set
-
 try:
     from ifupdown2.nlmanager.nlmanager import Link
 
@@ -289,7 +287,7 @@ class bond(moduleBase):
 
         clag_bond = self._is_clag_bond(ifaceobj)
 
-        for slave in Set(slaves).difference(Set(runningslaves)):
+        for slave in set(slaves).difference(set(runningslaves)):
             if (not ifupdownflags.flags.PERFMODE and
                 not self.ipcmd.link_exists(slave)):
                     self.log_error('%s: skipping slave %s, does not exist'

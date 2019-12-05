@@ -10,8 +10,6 @@ import fcntl
 import atexit
 import signal
 
-from sets import Set
-
 try:
     import ifupdown2.ifupdown.policymanager as policymanager
     import ifupdown2.ifupdown.ifupdownflags as ifupdownflags
@@ -500,7 +498,7 @@ class vrf(moduleBase):
                     ifupdownflags.flags.WITH_DEPENDS or
                     (ifupdownflags.flags.CLASS and
                      ifaceobj.classes and vrf_master_objs[0].classes and
-                     Set(ifaceobj.classes).intersection(vrf_master_objs[0].classes))):
+                     set(ifaceobj.classes).intersection(vrf_master_objs[0].classes))):
                     self._up_vrf_slave_without_master(ifacename, vrfname,
                                                       ifaceobj,
                                                       vrf_master_objs,

@@ -6,8 +6,6 @@
 
 import os
 
-from sets import Set
-
 try:
     from ifupdown2.ifupdown.iface import *
     from ifupdown2.ifupdown.utils import utils
@@ -359,7 +357,7 @@ class mstpctl(moduleBase):
         if not bridgeports:
             return
         err = 0
-        for bridgeport in Set(bridgeports).difference(Set(runningbridgeports)):
+        for bridgeport in set(bridgeports).difference(set(runningbridgeports)):
             try:
                 if (not ifupdownflags.flags.DRYRUN and
                     not self.ipcmd.link_exists(bridgeport)):
@@ -892,8 +890,8 @@ class mstpctl(moduleBase):
                     continue
                 portliststatus = 1
                 if running_port_list and bridge_port_list:
-                    difference = Set(running_port_list).symmetric_difference(
-                                                        Set(bridge_port_list))
+                    difference = set(running_port_list).symmetric_difference(
+                                                        set(bridge_port_list))
                     if not difference:
                         portliststatus = 0
                 ifaceobjcurr.update_config_with_status('mstpctl-ports',

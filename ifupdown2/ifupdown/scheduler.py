@@ -10,8 +10,6 @@
 import os
 import sys
 
-from sets import Set
-
 try:
     from ifupdown2.ifupdown.graph import *
     from ifupdown2.ifupdown.ifupdownbase import *
@@ -389,7 +387,7 @@ class ifaceScheduler():
             ifaceobj = ifupdownobj.get_ifaceobj_first(ifacename)
             if not ifaceobj:
                continue
-            ulist = Set(ifaceobj.upperifaces).difference(upperifacenames)
+            ulist = set(ifaceobj.upperifaces).difference(upperifacenames)
             nulist = []
             for u in ulist:
                 uifaceobj = ifupdownobj.get_ifaceobj_first(u)
