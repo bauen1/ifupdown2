@@ -436,7 +436,7 @@ class AttributeString(Attribute):
         self.LEN = calcsize(self.PACK)
 
         try:
-            self.value = remove_trailing_null(unpack(self.PACK, self.data[4:self.length])[0])
+            self.value = remove_trailing_null(unpack(self.PACK, self.data[4:self.length])[0].decode())
         except struct.error:
             self.log.error("%s unpack of %s failed, data 0x%s" % (self, self.PACK, hexlify(self.data[4:self.length])))
             raise
