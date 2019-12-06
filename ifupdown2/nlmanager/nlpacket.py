@@ -257,7 +257,7 @@ class Attribute(object):
         pad = self.pad_bytes_needed(length)
 
         if pad:
-            raw += '\0' * pad
+            raw += b'\0' * pad
 
         return raw
 
