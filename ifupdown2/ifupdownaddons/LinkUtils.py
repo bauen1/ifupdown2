@@ -332,7 +332,7 @@ class LinkUtils(utilsBase):
                 #bportattrs['mcrouters'] = self.read_file_oneline(
                 #    '/sys/class/net/%s/brport/multicast_router' % pname)
                 #bportattrs['mc fast leave'] = self.read_file_oneline(
-                #    '/sys/class/net/%s/brport/multicast_fast_leave' % pname)								
+                #    '/sys/class/net/%s/brport/multicast_fast_leave' % pname)
 
             except Exception as e:
                 self.logger.warn('%s: error while processing bridge attributes: %s' % (bridgename, str(e)))

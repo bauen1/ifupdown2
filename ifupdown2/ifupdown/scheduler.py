@@ -444,10 +444,10 @@ class ifaceScheduler():
         if (dependency_graph):
             ifupdownobj.logger.info('\nDependency Graph:')
             ifupdownobj.logger.info(dependency_graph)
-	    if (indegrees):
-		    ifupdownobj.logger.info('\nIndegrees:')
-		    ifupdownobj.logger.info(indegrees)
-	    ifupdownobj.logger.info('}\n')
+            if (indegrees):
+                ifupdownobj.logger.info('\nIndegrees:')
+                ifupdownobj.logger.info(indegrees)
+            ifupdownobj.logger.info('}\n')
 
     @classmethod
     def get_sorted_iface_list(cls, ifupdownobj, ifacenames, ops,
