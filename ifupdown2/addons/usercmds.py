@@ -50,7 +50,7 @@ class usercmds(moduleBase):
             for cmd in cmd_list:
                 try:
                     utils.exec_user_command(cmd)
-                except Exception, e:
+                except Exception as e:
                     if not self.ignore_error(str(e)):
                         self.logger.warn('%s: %s %s' % (ifaceobj.name, op,
                                                         str(e).strip('\n')))

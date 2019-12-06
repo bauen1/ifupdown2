@@ -43,7 +43,7 @@ class xfrm(moduleBase):
                     'xfrm-id' :
                         { 'help' : 'xfrm id',
                           'validrange' : ['1', '65535'],
-                          'example': ['xfrm-id 1'] 
+                          'example': ['xfrm-id 1']
                         },
                     'xfrm-physdev':
                         {'help': 'xfrm physical device',
@@ -123,7 +123,7 @@ class xfrm(moduleBase):
         try:
             xfrm_ifacename = self._get_xfrm_name(ifaceobj)
             self.ipcmd.link_delete(xfrm_ifacename)
-        except Exception, e:
+        except Exception as e:
             self.log_warn(str(e))
 
     def _query_check(self, ifaceobj, ifaceobjcurr):

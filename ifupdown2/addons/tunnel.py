@@ -114,7 +114,7 @@ class tunnel(moduleBase):
                 # so just recreate it IFF there have been changes.
                 self.ipcmd.link_delete(ifaceobj.name)
                 self.ipcmd.tunnel_create(ifaceobj.name, mode, attrs_mapped)
-        except Exception, e:
+        except Exception as e:
             self.log_warn(str(e))
 
     def _down(self, ifaceobj):
@@ -122,7 +122,7 @@ class tunnel(moduleBase):
             return
         try:
             self.ipcmd.link_delete(ifaceobj.name)
-        except Exception, e:
+        except Exception as e:
             self.log_warn(str(e))
 
     def get_dependent_ifacenames(self, ifaceobj, ifacenames_all=None):

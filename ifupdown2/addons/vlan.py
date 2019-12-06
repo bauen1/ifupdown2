@@ -163,7 +163,7 @@ class vlan(moduleBase):
         try:
             netlink.link_del(ifaceobj.name)
             self._bridge_vid_add_del(ifaceobj, vlanrawdevice, vlanid, add=False)
-        except Exception, e:
+        except Exception as e:
             self.log_warn(str(e))
 
     def _query_check(self, ifaceobj, ifaceobjcurr):

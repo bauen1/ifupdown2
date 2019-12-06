@@ -127,7 +127,7 @@ class vrrpd(moduleBase):
         try:
             utils.exec_command('%s -k -i %s' %
                                (utils.ifplugd_cmd, ifaceobj.name))
-        except Exception, e:
+        except Exception as e:
             self.logger.debug('%s: ifplugd down error (%s)'
                               %(ifaceobj.name, str(e)))
             pass
@@ -135,7 +135,7 @@ class vrrpd(moduleBase):
         for pidfile in glob.glob('/var/run/vrrpd_%s_*.pid' %ifaceobj.name):
             try:
                 self._kill_pid_from_file(pidfile)
-            except Exception, e:
+            except Exception as e:
                 self.logger.debug('%s: vrrpd down error (%s)'
                                   %(ifaceobj.name, str(e)))
                 pass
