@@ -275,7 +275,7 @@ class Attribute(object):
         if self.net_byteorder:
             attr_type_with_flags = attr_type_with_flags | NLA_F_NET_BYTEORDER
 
-        raw = pack(self.HEADER_PACK, length, attr_type_with_flags) + pack(self.PACK, self.value)
+        raw = pack(self.HEADER_PACK, length, attr_type_with_flags) + pack(self.PACK, self.value.encode())
         raw = self.pad(length, raw)
         return raw
 
@@ -422,11 +422,11 @@ class AttributeString(Attribute):
         self.LEN = None
 
     def encode(self):
-        self.PACK = '%ds' % len(self.value)
+        self.PACK = '%ds' % len(self.value.encode())
         self.LEN = calcsize(self.PACK)
 
         length = self.HEADER_LEN + self.LEN
-        raw = pack(self.HEADER_PACK, length, self.atype) + pack(self.PACK, self.value)
+        raw = pack(self.HEADER_PACK, length, self.atype) + pack(self.PACK, self.value.encode())
         raw = self.pad(length, raw)
         return raw
 
