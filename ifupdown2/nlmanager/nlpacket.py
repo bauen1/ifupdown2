@@ -422,10 +422,6 @@ class AttributeString(Attribute):
         self.LEN = None
 
     def encode(self):
-        # some interface names come from JSON as unicode strings
-        # and cannot be packed as is so we must convert them to strings
-        if isinstance(self.value, unicode):
-            self.value = str(self.value)
         self.PACK = '%ds' % len(self.value)
         self.LEN = calcsize(self.PACK)
 
