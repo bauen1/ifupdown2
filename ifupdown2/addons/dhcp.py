@@ -155,7 +155,7 @@ class dhcp(moduleBase):
                         if timeout:
                             time.sleep(1)
 
-        except Exception, e:
+        except Exception as e:
             self.log_error(str(e), ifaceobj)
 
     def _down_stale_dhcp_config(self, ifaceobj, family, dhclientX_running):

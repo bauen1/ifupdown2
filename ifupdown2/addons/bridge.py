@@ -933,7 +933,7 @@ class bridge(moduleBase):
             try:
                 waitportlist = self.parse_port_list(ifaceobj.name,
                                                     waitportvals[1])
-            except IndexError, e:
+            except IndexError as e:
                 # ignore error and use all bridge ports
                 waitportlist = portlist
                 pass
@@ -946,14 +946,14 @@ class bridge(moduleBase):
                         if not self.ipcmd.link_exists(p)]):
                     break;
                 time.sleep(1)
-        except Exception, e:
+        except Exception as e:
             self.log_warn('%s: unable to process waitport: %s'
                     %(ifaceobj.name, str(e)))
 
     def _enable_disable_ipv6(self, port, enable='1'):
         try:
             self.write_file('/proc/sys/net/ipv6/conf/%s/disable_ipv6' % port, enable)
-        except Exception, e:
+        except Exception as e:
             self.logger.info(str(e))
 
     def handle_ipv6(self, ports, state, ifaceobj=None):
@@ -1050,12 +1050,12 @@ class bridge(moduleBase):
                     ports = 0
                     self.ipcmd.batch_commit()
                     self.ipcmd.batch_start()
-            except Exception, e:
+            except Exception as e:
                 self.logger.error(str(e))
                 pass
         try:
             self.ipcmd.batch_commit()
-        except Exception, e:
+        except Exception as e:
             self._pretty_print_add_ports_error(str(e), ifaceobj,
                                                bridgeports)
             pass
@@ -1086,7 +1086,7 @@ class bridge(moduleBase):
                             %(ifaceobj.name, p)) != '3']):
                     break;
                 time.sleep(1)
-        except Exception, e:
+        except Exception as e:
             self.log_warn('%s: unable to process maxwait: %s'
                     %(ifaceobj.name, str(e)))
 
@@ -1202,7 +1202,7 @@ class bridge(moduleBase):
                         else:
                             self.ipcmd.bridge_port_pvid_del(port, running_pvid)
                     self.ipcmd.bridge_port_pvid_add(port, pvid)
-                except Exception, e:
+                except Exception as e:
                     self.log_warn('%s: failed to set pvid `%s` (%s)'
                             %(ifaceobj.name, p, str(e)))
 
@@ -1230,7 +1230,7 @@ class bridge(moduleBase):
                                     self._compress_into_ranges(vids_to_add))
                     else:
                         self.ipcmd.bridge_port_vids_add(port, vids_int)
-                except Exception, e:
+                except Exception as e:
                     self.log_warn('%s: failed to set vid `%s` (%s)'
                         %(ifaceobj.name, p, str(e)))
 
@@ -1505,7 +1505,7 @@ class bridge(moduleBase):
                 vids_to_add.add(pvid_to_del)
         except exceptions.ReservedVlanException as e:
             raise e
-        except Exception, e:
+        except Exception as e:
             self.log_error('%s: failed to process vids/pvids'
                            %bportifaceobj.name + ' vids = %s' %str(vids) +
                            'pvid = %s ' %pvid + '(%s)' %str(e),
@@ -1517,7 +1517,7 @@ class bridge(moduleBase):
                self.ipcmd.bridge_vids_del(bportifaceobj.name,
                                           self._compress_into_ranges(
                                           vids_to_del), isbridge)
-        except Exception, e:
+        except Exception as e:
                 self.log_warn('%s: failed to del vid `%s` (%s)'
                         %(bportifaceobj.name, str(vids_to_del), str(e)))
 
@@ -1525,7 +1525,7 @@ class bridge(moduleBase):
             if pvid_to_del:
                self.ipcmd.bridge_port_pvid_del(bportifaceobj.name,
                                                pvid_to_del)
-        except Exception, e:
+        except Exception as e:
                 self.log_warn('%s: failed to del pvid `%s` (%s)'
                         %(bportifaceobj.name, pvid_to_del, str(e)))
 
@@ -1534,7 +1534,7 @@ class bridge(moduleBase):
                self.ipcmd.bridge_vids_add(bportifaceobj.name,
                                           self._compress_into_ranges(
                                           vids_to_add), isbridge)
-        except Exception, e:
+        except Exception as e:
                 self.log_error('%s: failed to set vid `%s` (%s)'
                                %(bportifaceobj.name, str(vids_to_add),
                                  str(e)), bportifaceobj, raise_error=False)
@@ -1543,7 +1543,7 @@ class bridge(moduleBase):
             if pvid_to_add and pvid_to_add != running_pvid:
                 self.ipcmd.bridge_port_pvid_add(bportifaceobj.name,
                                                 pvid_to_add)
-        except Exception, e:
+        except Exception as e:
                 self.log_error('%s: failed to set pvid `%s` (%s)'
                                %(bportifaceobj.name, pvid_to_add, str(e)),
                                bportifaceobj)
@@ -1652,7 +1652,7 @@ class bridge(moduleBase):
                         self._check_untagged_bridge(ifaceobj.name, bportifaceobj, ifaceobj_getfunc)
                 except exceptions.ReservedVlanException as e:
                     raise e
-                except Exception, e:
+                except Exception as e:
                     err = True
                     self.logger.warn('%s: %s' %(ifaceobj.name, str(e)))
                     pass
@@ -2129,7 +2129,7 @@ class bridge(moduleBase):
                         continue
                     try:
                         netlink.link_set_updown(p, "up")
-                    except Exception, e:
+                    except Exception as e:
                         self.logger.debug('%s: %s: link set up (%s)'
                                           % (ifaceobj.name, p, str(e)))
                         pass
@@ -2546,7 +2546,7 @@ class bridge(moduleBase):
                             running_bridge_port_vids += ' %s' %p
                     else:
                         err += 1
-                except Exception, e:
+                except Exception as e:
                     self.log_warn('%s: failure checking vid %s (%s)'
                         %(ifaceobj.name, p, str(e)))
             if err:
@@ -2575,7 +2575,7 @@ class bridge(moduleBase):
                         err += 1
                         running_bridge_port_pvids += ' %s=%s' %(port,
                                                             running_pvid)
-                except Exception, e:
+                except Exception as e:
                     self.log_warn('%s: failure checking pvid %s (%s)'
                             %(ifaceobj.name, pvid, str(e)))
             if err:
@@ -2618,7 +2618,7 @@ class bridge(moduleBase):
                self.logger.debug('%s: bridge: unable to get bridge attrs'
                                  %ifaceobj.name)
                runningattrs = {}
-        except Exception, e:
+        except Exception as e:
             self.logger.warn(str(e))
             runningattrs = {}
 
@@ -2725,7 +2725,7 @@ class bridge(moduleBase):
                               status = 1
                       elif currv != v:
                           status = 1
-                   except Exception, e:
+                   except Exception as e:
                       self.log_warn(str(e))
                    pass
                ifaceobjcurr.update_config_with_status(k, currstr, status)
@@ -2966,7 +2966,7 @@ class bridge(moduleBase):
                 else:
                     ifaceobjcurr.update_config_with_status(attr,
                                             running_attrval, 0)
-            except Exception, e:
+            except Exception as e:
                 self.log_warn('%s: %s' %(ifaceobj.name, str(e)))
 
         self._query_check_l2protocol_tunnel_on_port(ifaceobj, ifaceobjcurr)

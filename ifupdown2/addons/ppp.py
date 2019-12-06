@@ -97,7 +97,7 @@ class ppp(moduleBase):
                 utils.exec_commandl(['/usr/bin/poff', old_provider], stdout=None, stderr=None)
                 utils.exec_commandl(['/usr/bin/pon', provider], stdout=None, stderr=None)
 
-        except Exception, e:
+        except Exception as e:
             self.log_warn(str(e))
 
     def _down(self, ifaceobj):
@@ -109,7 +109,7 @@ class ppp(moduleBase):
             # This fails if not running
             utils.exec_user_command('/bin/ps ax | /bin/grep pppd | /bin/grep -v grep | /bin/grep ' + provider)
             utils.exec_commandl(['/usr/bin/poff', provider], stdout=None, stderr=None)
-        except Exception, e:
+        except Exception as e:
             self.log_warn(str(e))
 
     def get_dependent_ifacenames(self, ifaceobj, ifacenames_all=None):

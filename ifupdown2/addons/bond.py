@@ -264,7 +264,7 @@ class bond(moduleBase):
         try:
             if os.path.exists("/sys/class/net/%s/brport" % ifname):
                 self.write_file("/proc/sys/net/ipv6/conf/%s/disable_ipv6" % ifname, "0")
-        except Exception, e:
+        except Exception as e:
             self.logger.info(str(e))
 
     def _is_clag_bond(self, ifaceobj):
@@ -303,7 +303,7 @@ class bond(moduleBase):
             if clag_bond:
                 try:
                     netlink.link_set_protodown(slave, "on")
-                except Exception, e:
+                except Exception as e:
                     self.logger.error('%s: %s' % (ifaceobj.name, str(e)))
             self.enable_ipv6_if_prev_brport(slave)
             netlink.link_set_master(slave, ifaceobj.name)
@@ -314,7 +314,7 @@ class bond(moduleBase):
                         netlink.link_set_updown(slave, "down")
                     else:
                         netlink.link_set_updown(slave, "up")
-               except Exception, e:
+               except Exception as e:
                     self.logger.debug('%s: %s' % (ifaceobj.name, str(e)))
                     pass
 
@@ -325,7 +325,7 @@ class bond(moduleBase):
                     if clag_bond:
                         try:
                             netlink.link_set_protodown(s, "off")
-                        except Exception, e:
+                        except Exception as e:
                             self.logger.error('%s: %s' % (ifaceobj.name, str(e)))
                 else:
                     # apply link-down config changes on running slaves
@@ -337,7 +337,7 @@ class bond(moduleBase):
                             netlink.link_set_updown(s, "down")
                         elif (not config_link_down and not link_up):
                             netlink.link_set_updown(s, "up")
-                    except Exception, e:
+                    except Exception as e:
                         self.logger.warn('%s: %s' % (ifaceobj.name, str(e)))
 
     def _check_updown_delay_log(self, ifaceobj, attr_name, value):
@@ -618,7 +618,7 @@ class bond(moduleBase):
         try:
             self.create_or_set_bond_config(ifaceobj)
             self._add_slaves(ifaceobj, ifaceobj_getfunc)
-        except Exception, e:
+        except Exception as e:
             self.log_error(str(e), ifaceobj)
 
     def _down(self, ifaceobj, ifaceobj_getfunc=None):

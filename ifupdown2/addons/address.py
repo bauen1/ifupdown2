@@ -378,7 +378,7 @@ class address(moduleBase):
                                           {}).get('preferred-lifetime'))
                 else:
                     self.ipcmd.addr_add(ifaceobj.name, newaddrs[addr_index])
-            except Exception, e:
+            except Exception as e:
                 self.log_error(str(e), ifaceobj)
 
     def _inet_address_config(self, ifaceobj, ifaceobj_getfunc=None,
@@ -445,7 +445,7 @@ class address(moduleBase):
                     if addr in skip_addrs:
                         continue
                     self.ipcmd.addr_del(ifaceobj.name, addr)
-            except Exception, e:
+            except Exception as e:
                 self.log_warn(str(e))
         if not newaddrs:
             return
@@ -923,7 +923,7 @@ class address(moduleBase):
 
             # Handle special things on a bridge
             self._process_bridge(ifaceobj, True)
-        except Exception, e:
+        except Exception as e:
             self.log_error('%s: %s' % (ifaceobj.name, str(e)), ifaceobj)
 
     def _down(self, ifaceobj, ifaceobj_getfunc=None):
@@ -958,7 +958,7 @@ class address(moduleBase):
 
             # Handle special things on a bridge
             self._process_bridge(ifaceobj, False)
-        except Exception, e:
+        except Exception as e:
             self.logger.debug('%s : %s' %(ifaceobj.name, str(e)))
             pass
 

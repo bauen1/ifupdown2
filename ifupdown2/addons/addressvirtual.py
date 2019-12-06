@@ -121,14 +121,14 @@ class addressvirtual(moduleBase):
                 for addr in hwaddress:
                     try:
                         self.ipcmd.bridge_fdb_del(bridgename, addr, vlan)
-                    except Exception, e:
+                    except Exception as e:
                         self.logger.debug("%s: %s" %(ifaceobj.name, str(e)))
                         pass
         elif self.ipcmd.is_bridge(ifaceobj.name):
             for addr in hwaddress:
                 try:
                     self.ipcmd.bridge_fdb_del(ifaceobj.name, addr)
-                except Exception, e:
+                except Exception as e:
                     self.logger.debug("%s: %s" %(ifaceobj.name, str(e)))
                     pass
 
@@ -195,7 +195,7 @@ class addressvirtual(moduleBase):
                                  ' .. flapping macvlan dev to fix entry.')
                 self.ipcmd.link_down(vifacename)
                 self.ipcmd.link_up(vifacename)
-        except Exception, e:
+        except Exception as e:
             self.logger.debug('%s: fixing route entry failed (%s)'
                               % (ifaceobj.name, str(e)))
             pass
@@ -769,7 +769,7 @@ class addressvirtual(moduleBase):
             self.ipcmd.batch_commit()
             if any(hwaddress):
                 self._remove_addresses_from_bridge(ifaceobj, hwaddress)
-        except Exception, e:
+        except Exception as e:
             import traceback
             traceback.print_exc()
             self.log_warn(str(e))

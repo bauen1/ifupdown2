@@ -119,7 +119,7 @@ class ethtool(moduleBase,utilsBase):
                 feccmd = ('%s --set-fec %s %s' %
                            (utils.ethtool_cmd, ifaceobj.name, feccmd))
                 utils.exec_command(feccmd)
-            except Exception, e:
+            except Exception as e:
                 self.log_error('%s: %s' %(ifaceobj.name, str(e)), ifaceobj)
         else:
             pass
@@ -213,7 +213,7 @@ class ethtool(moduleBase,utilsBase):
             try:
                 cmd = ('%s -s %s %s' % (utils.ethtool_cmd, ifaceobj.name, cmd))
                 utils.exec_command(cmd)
-            except Exception, e:
+            except Exception as e:
                 self.log_error('%s: %s' % (ifaceobj.name, str(e)), ifaceobj)
 
     def _pre_up(self, ifaceobj, operation='post_up'):

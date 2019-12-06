@@ -84,7 +84,7 @@ class link(moduleBase):
            return
         try:
             self.ipcmd.link_delete(ifaceobj.name)
-        except Exception, e:
+        except Exception as e:
             self.log_warn(str(e))
 
     def _query_check(self, ifaceobj, ifaceobjcurr):
