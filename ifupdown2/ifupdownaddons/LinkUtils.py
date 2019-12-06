@@ -1298,7 +1298,7 @@ class LinkUtils(utilsBase):
             cmd += ' tunnel add %s mode %s' % (tunnelname, mode)
 
         if attrs:
-            for k, v in attrs.iteritems():
+            for k, v in attrs.items():
                 cmd += ' %s' % k
                 if v:
                     cmd += ' %s' % v
@@ -1315,7 +1315,7 @@ class LinkUtils(utilsBase):
         cmd = 'tunnel change'
         cmd += ' %s' %(tunnelname)
         if attrs:
-            for k, v in attrs.iteritems():
+            for k, v in attrs.items():
                 cmd += ' %s' %k
                 if v:
                     cmd += ' %s' %v
@@ -1465,7 +1465,7 @@ class LinkUtils(utilsBase):
         cmd = 'link add'
         cmd += ' name %s type %s' % (ifacename, t)
         if attrs:
-            for k, v in attrs.iteritems():
+            for k, v in attrs.items():
                 cmd += ' %s' % k
                 if v:
                     cmd += ' %s' % v
@@ -2295,7 +2295,7 @@ class LinkUtils(utilsBase):
         portattrs = self._link_cache_get([bridgename, 'linkinfo', 'ports', bridgeportname])
         if portattrs == None:
             portattrs = {}
-        for k, v in attrdict.iteritems():
+        for k, v in attrdict.items():
             if ifupdownflags.flags.CACHE:
                 curval = portattrs.get(k)
                 if curval and curval == v:
@@ -2327,7 +2327,7 @@ class LinkUtils(utilsBase):
                             attrval))
 
     def set_bridge_attrs(self, bridgename, attrdict):
-        for k, v in attrdict.iteritems():
+        for k, v in attrdict.items():
             if not v:
                 continue
             if self._link_cache_check([bridgename, 'linkinfo', k], v):

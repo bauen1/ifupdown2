@@ -557,7 +557,7 @@ class ifupdownMain(ifupdownBase):
         """ debug funtion to print raw dependency
         info - lower and upper devices"""
 
-        for ifacename, ifaceobjs in self.ifaceobjdict.iteritems():
+        for ifacename, ifaceobjs in self.ifaceobjdict.items():
             iobj = ifaceobjs[0]
             self.logger.info("%s: refcnt: %d, lower: %s, upper: %s" %(ifacename,
                              self.get_iface_refcnt(ifacename),
@@ -2128,7 +2128,7 @@ class ifupdownMain(ifupdownBase):
                             if new_ifaceobjdict:
                                 del new_ifaceobjdict[ifname_to_remove]
 
-                            for k, v in new_dependency_graph.iteritems():
+                            for k, v in new_dependency_graph.items():
                                 if ifname_to_remove in v:
                                     v.remove(ifname_to_remove)
                             del new_dependency_graph[ifname_to_remove]

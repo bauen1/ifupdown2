@@ -491,7 +491,7 @@ class addressvirtual(moduleBase):
             for key, sysval in {
                 "accept_dad": "0",
                 "dad_transmits": "0"
-            }.iteritems():
+            }.items():
                 syskey = "net.ipv6.conf.%s.%s" % (macvlan_ifname, key)
                 if self.sysctl_get(syskey) != sysval:
                     self.sysctl_set(syskey, sysval)

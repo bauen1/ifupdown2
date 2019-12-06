@@ -216,7 +216,7 @@ class vrf(moduleBase):
         vrfs = self.ipcmd.link_get_vrfs()
         running_vrf_map = {}
         if vrfs:
-            for v, lattrs in vrfs.iteritems():
+            for v, lattrs in vrfs.items():
                 table = lattrs.get('table', None)
                 if table:
                    running_vrf_map[int(table)] = v
@@ -272,7 +272,7 @@ class vrf(moduleBase):
             with open(self.iproute2_vrf_filename, 'w') as f:
                 f.write(self.iproute2_vrf_filehdr %(self.vrf_table_id_start,
                         self.vrf_table_id_end))
-                for t, v in self.iproute2_vrf_map.iteritems():
+                for t, v in self.iproute2_vrf_map.items():
                     f.write('%s %s\n' %(t, v))
                 f.flush()
         except Exception as e:
@@ -298,7 +298,7 @@ class vrf(moduleBase):
             self.iproute2_vrf_map_fd.write(self.iproute2_vrf_filehdr
                                            %(self.vrf_table_id_start,
                                              self.vrf_table_id_end))
-            for t, v in self.iproute2_vrf_map.iteritems():
+            for t, v in self.iproute2_vrf_map.items():
                 self.iproute2_vrf_map_fd.write('%s %s\n' %(t, v))
             self.iproute2_vrf_map_fd.flush()
 
@@ -335,7 +335,7 @@ class vrf(moduleBase):
         return None
 
     def _get_iproute2_vrf_table(self, vrf_dev_name):
-        for t, v in self.iproute2_vrf_map.iteritems():
+        for t, v in self.iproute2_vrf_map.items():
             if v == vrf_dev_name:
                 return str(t)
         return None

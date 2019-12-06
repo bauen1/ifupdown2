@@ -706,7 +706,7 @@ class AttributeIFLA_AF_SPEC(Attribute):
         # pack everything via a single pack() call.
         sub_attr_to_add = []
 
-        for (sub_attr_type, sub_attr_value) in self.value.iteritems():
+        for (sub_attr_type, sub_attr_value) in self.value.items():
 
             if sub_attr_type == Link.IFLA_BRIDGE_FLAGS:
                 sub_attr_to_add.append((sub_attr_type, sub_attr_value))
@@ -968,11 +968,11 @@ class AttributeIFLA_AF_SPEC(Attribute):
         value_pretty = {}
 
         if self.family == AF_BRIDGE:
-            for (sub_key, sub_value) in self.value.iteritems():
+            for (sub_key, sub_value) in self.value.items():
                 sub_key_pretty = "(%2d) %s" % (sub_key, Link.ifla_bridge_af_spec_to_string.get(sub_key))
                 value_pretty[sub_key_pretty] = sub_value
         elif self.family == AF_UNSPEC:
-            for (family, family_attr) in self.value.iteritems():
+            for (family, family_attr) in self.value.items():
                 family_value_pretty = {}
 
                 if family == AF_INET6:
@@ -982,7 +982,7 @@ class AttributeIFLA_AF_SPEC(Attribute):
                 else:
                     continue # log error?
 
-                for (sub_key, sub_value) in family_attr.iteritems():
+                for (sub_key, sub_value) in family_attr.items():
                     sub_key_pretty = "(%2d) %s" % (sub_key, family_af_spec_to_string.get(sub_key))
                     family_value_pretty[sub_key_pretty] = sub_value
                 value_pretty = family_value_pretty
@@ -1118,7 +1118,7 @@ class AttributeIFLA_LINKINFO(Attribute):
         #
         # Until we cross that bridge though we will keep things nice and simple and
         # pack everything via a single pack() call.
-        for (sub_attr_type, sub_attr_value) in self.value.iteritems():
+        for (sub_attr_type, sub_attr_value) in self.value.items():
             sub_attr_pack_layout = ['=', 'HH']
             sub_attr_payload = [0, sub_attr_type]
             sub_attr_length_index = 0
@@ -1131,7 +1131,7 @@ class AttributeIFLA_LINKINFO(Attribute):
 
                 sub_attr_payload = [0, sub_attr_type | NLA_F_NESTED]
 
-                for (info_data_type, info_data_value) in sub_attr_value.iteritems():
+                for (info_data_type, info_data_value) in sub_attr_value.items():
 
                     if kind == 'vlan':
                         if info_data_type == Link.IFLA_VLAN_ID:
@@ -1445,7 +1445,7 @@ class AttributeIFLA_LINKINFO(Attribute):
 
                 sub_attr_payload = [0, sub_attr_type | NLA_F_NESTED]
 
-                for (info_slave_data_type, info_slave_data_value) in sub_attr_value.iteritems():
+                for (info_slave_data_type, info_slave_data_value) in sub_attr_value.items():
 
                     if slave_kind == 'bridge':
 
@@ -2057,7 +2057,7 @@ class AttributeIFLA_LINKINFO(Attribute):
         if ifla_info_kind or ifla_info_slave_kind:
             value_pretty = {}
 
-            for (sub_key, sub_value) in self.value.iteritems():
+            for (sub_key, sub_value) in self.value.items():
                 sub_key_pretty = "(%2d) %s" % (sub_key, Link.ifla_info_to_string.get(sub_key, 'UNKNOWN'))
                 sub_value_pretty = sub_value
 
@@ -2065,7 +2065,7 @@ class AttributeIFLA_LINKINFO(Attribute):
                     kind_to_string_dict = kind_dict.get(sub_key, {})
                     sub_value_pretty = {}
 
-                    for (sub_sub_key, sub_sub_value) in sub_value.iteritems():
+                    for (sub_sub_key, sub_sub_value) in sub_value.items():
                         sub_sub_key_pretty = "(%2d) %s" % (sub_sub_key, kind_to_string_dict.get(sub_sub_key, 'UNKNOWN'))
                         sub_value_pretty[sub_sub_key_pretty] = sub_sub_value
 
@@ -2097,7 +2097,7 @@ class AttributeIFLA_PROTINFO(Attribute):
         #
         # Until we cross that bridge though we will keep things nice and simple and
         # pack everything via a single pack() call.
-        for (sub_attr_type, sub_attr_value) in self.value.iteritems():
+        for (sub_attr_type, sub_attr_value) in self.value.items():
             sub_attr_pack_layout = ['=', 'HH']
             sub_attr_payload = [0, sub_attr_type]
             sub_attr_length_index = 0
@@ -2294,7 +2294,7 @@ class AttributeIFLA_PROTINFO(Attribute):
 
         value_pretty = {}
 
-        for (sub_key, sub_value) in self.value.iteritems():
+        for (sub_key, sub_value) in self.value.items():
             sub_key_pretty = "(%2d) %s" % (sub_key, Link.ifla_brport_to_string.get(sub_key, 'UNKNOWN'))
             sub_value_pretty = sub_value
             value_pretty[sub_key_pretty] = sub_value_pretty
@@ -2390,7 +2390,7 @@ class NetlinkPacket(object):
     def get_flags_string(self):
         foo = []
 
-        for (flag, flag_string) in self.flag_to_string.iteritems():
+        for (flag, flag_string) in self.flag_to_string.items():
             if self.flags & flag:
                 foo.append(flag_string)
 
@@ -2603,7 +2603,7 @@ class NetlinkPacket(object):
         self.pid = pid
         attrs = ''
 
-        for attr in self.attributes.itervalues():
+        for attr in self.attributes.values():
             attrs += attr.encode()
 
         self.length = self.header_LEN + len(self.body) + len(attrs)
@@ -2620,7 +2620,7 @@ class NetlinkPacket(object):
                        self.get_netlink_header_flags_string(self.msgtype, self.flags)))
 
     def pretty_display_dict(self, dic, level):
-        for k,v in dic.iteritems():
+        for k,v in dic.items():
             if isinstance(v, dict):
                 self.log.debug(' '*level + str(k) + ':')
                 self.pretty_display_dict(v, level+5)
@@ -2634,7 +2634,7 @@ class NetlinkPacket(object):
         if desc is None:
             desc = "RXed %s, length %d, seq %d, pid %d, flags 0x%x" % (self, self.length, self.seq, self.pid, self.flags)
 
-        for (attr_type, attr_obj) in self.attributes.iteritems():
+        for (attr_type, attr_obj) in self.attributes.items():
             key_string = "(%2d) %s" % (attr_type, self.get_attr_string(attr_type))
             attr_string[key_string] = attr_obj.get_pretty_value()
 

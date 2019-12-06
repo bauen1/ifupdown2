@@ -207,7 +207,7 @@ class mstpctlutil(utilsBase):
                                      str(attrvalue))
 
     def set_bridge_attrs(self, bridgename, attrdict, check=True):
-        for k, v in attrdict.iteritems():
+        for k, v in attrdict.items():
             if not v:
                 continue
             try:

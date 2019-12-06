@@ -456,7 +456,7 @@ class NetlinkManager(object):
 
         if ecmp_routes:
 
-            for (route_key, value) in ecmp_routes.iteritems():
+            for (route_key, value) in ecmp_routes.items():
                 (afi, ip, mask) = route_key
 
                 route = Route(rtm_command, debug, use_color=self.use_color)
@@ -789,7 +789,7 @@ class NetlinkManager(object):
               25: 0x08000200  ....  Nested Attribute - Length 0x0008 (8),  Type 0x0002 (2) IFLA_BRIDGE_VLAN_INFO
               26: 0x00001400  ....
             '''
-            for (x_type, x_value) in ifla_af_spec.iteritems():
+            for (x_type, x_value) in ifla_af_spec.items():
                 if x_type == Link.IFLA_BRIDGE_VLAN_INFO:
                     for (vlan_flag, vlan_id) in x_value:
                         if filter_vlanid is None or vlan_id in filter_vlanid:
@@ -823,7 +823,7 @@ class NetlinkManager(object):
         print("   Interface  VLAN  Flags")
         print("  ==========  ====  =====")
 
-        for (ifname, vlan_tuples) in sorted(iface_vlans.iteritems()):
+        for (ifname, vlan_tuples) in sorted(iface_vlans.items()):
             for (vlan_id, vlan_flag) in sorted(vlan_tuples):
 
                 if vlan_flag & Link.BRIDGE_VLAN_INFO_RANGE_BEGIN:

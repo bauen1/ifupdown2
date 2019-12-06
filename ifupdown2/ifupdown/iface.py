@@ -616,7 +616,7 @@ class iface():
 
     def squash(self, newifaceobj):
         """ This squashes the iface object """
-        for attrname, attrlist in newifaceobj.config.iteritems():
+        for attrname, attrlist in newifaceobj.config.items():
             # if allready present add it to the list
             # else add it to the end of the dictionary
             # We need to maintain order.

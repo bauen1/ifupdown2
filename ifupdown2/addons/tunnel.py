@@ -73,7 +73,7 @@ class tunnel(moduleBase):
         return ifaceobj.addr_method == "tunnel" and ifaceobj.get_attr_value_first('mode')
 
     def _has_config_changed(self, attrs_present, attrs_configured):
-        for key, value in attrs_configured.iteritems():
+        for key, value in attrs_configured.items():
             if attrs_present.get(key) != value:
                 return True
         return False

@@ -371,7 +371,7 @@ class moduleBase(object):
         try:
             retattrs = []
             attrsdict = self._modinfo.get('attrs')
-            for attrname, attrvals in attrsdict.iteritems():
+            for attrname, attrvals in attrsdict.items():
                 if not attrvals or attrvals.get('deprecated'):
                     continue
                 retattrs.append(attrname)
