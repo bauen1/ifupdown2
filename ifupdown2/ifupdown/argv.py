@@ -99,7 +99,7 @@ class Parse:
 
     def get_op(self):
         try:
-            for key, value in self.valid_ops.iteritems():
+            for key, value in self.valid_ops.items():
                 if self.executable_name.endswith(key):
                     return value
         except:

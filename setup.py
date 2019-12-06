@@ -8,7 +8,7 @@ from setuptools import find_packages
 
 INSTALL_REQUIRES = [
     'argcomplete',
-    'ipaddr',
+    'configparser'
 ]
 
 DATA_FILES = [

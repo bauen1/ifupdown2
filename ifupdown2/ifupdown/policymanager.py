@@ -32,7 +32,6 @@ import json
 import glob
 import logging
 
-
 class policymanager():
     def __init__(self):
         # we should check for these files in order

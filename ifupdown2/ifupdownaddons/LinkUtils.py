@@ -13,7 +13,6 @@ import signal
 import socket
 import subprocess
 
-from string import maketrans
 from ipaddress import IPv6Network, ip_network
 
 try:
@@ -60,7 +59,7 @@ class LinkUtils(utilsBase):
     DEFAULT_IP_METRIC = 1024
     ADDR_METRIC_SUPPORT = None
 
-    mac_translate_tab = maketrans(":.-,", "    ")
+    mac_translate_tab = str.maketrans(":.-,", "    ")
 
     def __init__(self, *args, **kargs):
         utilsBase.__init__(self, *args, **kargs)

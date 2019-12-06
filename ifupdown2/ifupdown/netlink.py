@@ -222,7 +222,7 @@ class Netlink(utilsBase):
         except Exception as e:
             raise Exception('netlink: %s: cannot create macvlan %s: %s'
                             % (ifacename, macvlan_ifacename, str(e)))
-    
+
     def link_add_xfrm(self, ifacename, xfrm_ifacename, xfrm_id):
         self.logger.info('%s: netlink: ip link add %s type xfrm dev %s if_id %s'
                          % (xfrm_ifacename, xfrm_ifacename, ifacename, xfrm_id))

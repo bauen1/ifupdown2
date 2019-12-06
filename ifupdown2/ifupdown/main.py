@@ -11,8 +11,8 @@
 import os
 import sys
 import signal
-import StringIO
-import ConfigParser
+from io import StringIO
+import configparser
 
 try:
     from ifupdown2.ifupdown.log import log
@@ -117,7 +117,7 @@ class Ifupdown2:
             config = f.read()
         configStr = '[ifupdown2]\n' + config
         configFP = StringIO.StringIO(configStr)
-        parser = ConfigParser.RawConfigParser()
+        parser = configparser.RawConfigParser()
         parser.readfp(configFP)
         configmap_g = dict(parser.items('ifupdown2'))
 

@@ -11,8 +11,7 @@ import select
 import logging
 import logging.handlers
 
-from cStringIO import StringIO
-
+from io import StringIO
 
 class Log:
     LOGGER_NAME = sys.argv[0].split('/')[-1]
