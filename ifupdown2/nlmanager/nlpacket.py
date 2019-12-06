@@ -321,7 +321,7 @@ class Attribute(object):
     def dump_lines(self, dump_buffer, line_number, color):
         line_number = self.dump_first_line(dump_buffer, line_number, color)
 
-        for x in xrange(1, self.attr_end/4):
+        for x in range(1, self.attr_end/4):
             start = x * 4
             end = start + 4
             dump_buffer.append(data_to_color_text(line_number, color, self.data[start:end], ''))
@@ -524,7 +524,7 @@ class AttributeIPAddress(Attribute):
 
         elif self.family == AF_INET6:
 
-            for x in xrange(1, self.attr_end/4):
+            for x in range(1, self.attr_end/4):
                 start = x * 4
                 end = start + 4
                 dump_buffer.append(data_to_color_text(line_number, color, self.data[start:end], self.value))
@@ -733,7 +733,7 @@ class AttributeIFLA_AF_SPEC(Attribute):
             sub_attr_payload[sub_attr_length_index] = sub_attr_length
 
             # add padding
-            for x in xrange(self.pad_bytes_needed(sub_attr_length)):
+            for x in range(self.pad_bytes_needed(sub_attr_length)):
                 sub_attr_pack_layout.append('x')
 
             # The [1:] is to remove the leading = so that when we do the ''.join() later
@@ -908,7 +908,7 @@ class AttributeIFLA_AF_SPEC(Attribute):
         next_sub_attr_line = 0
         sub_attr_line = True
 
-        for x in xrange(1, self.attr_end/4):
+        for x in range(1, self.attr_end/4):
             start = x * 4
             end = start + 4
 
@@ -1520,7 +1520,7 @@ class AttributeIFLA_LINKINFO(Attribute):
             sub_attr_payload[sub_attr_length_index] = sub_attr_length
 
             # add padding
-            for x in xrange(self.pad_bytes_needed(sub_attr_length)):
+            for x in range(self.pad_bytes_needed(sub_attr_length)):
                 sub_attr_pack_layout.append('x')
 
             # The [1:] is to remove the leading = so that when we do the ''.join() later
@@ -1976,7 +1976,7 @@ class AttributeIFLA_LINKINFO(Attribute):
         next_sub_attr_line = 0
         sub_attr_line = True
 
-        for x in xrange(1, self.attr_end/4):
+        for x in range(1, self.attr_end/4):
             start = x * 4
             end = start + 4
 
@@ -2151,7 +2151,7 @@ class AttributeIFLA_PROTINFO(Attribute):
             sub_attr_payload[sub_attr_length_index] = sub_attr_length
 
             # add padding
-            for x in xrange(self.pad_bytes_needed(sub_attr_length)):
+            for x in range(self.pad_bytes_needed(sub_attr_length)):
                 sub_attr_pack_layout.append('x')
 
             # The [1:] is to remove the leading = so that when we do the ''.join() later
@@ -2250,7 +2250,7 @@ class AttributeIFLA_PROTINFO(Attribute):
         next_sub_attr_line = 0
         sub_attr_line = True
 
-        for x in xrange(1, self.attr_end/4):
+        for x in range(1, self.attr_end/4):
             start = x * 4
             end = start + 4
 

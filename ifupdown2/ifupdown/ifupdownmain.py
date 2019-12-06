@@ -824,7 +824,7 @@ class ifupdownMain(ifupdownBase):
     def _keyword_check_list(self, _list, obj, limit=None):
         try:
             if limit and limit > 0:
-                for i in xrange(0, limit):
+                for i in range(0, limit):
                     obj(_list[i])
                 return len(_list) == limit
             else:

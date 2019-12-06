@@ -150,7 +150,7 @@ class NetlinkManager(object):
             # to counter this problem, we will retry up to NLMANAGER_BIND_RETRY times to
             # bind our socket, every time increasing the address (or pid) that we bind it
             # to. NLMANAGER_BIND_RETRY default to 4242
-            for i in xrange(0, int(os.getenv("NLMANAGER_BIND_RETRY", 4242))):
+            for i in range(0, int(os.getenv("NLMANAGER_BIND_RETRY", 4242))):
                 try:
                     self.tx_socket.bind((self.pid + i, 0))
                     # the bind call succeeded, we need to update self.pid
@@ -837,7 +837,7 @@ class NetlinkManager(object):
                         log.warning("BRIDGE_VLAN_INFO_RANGE_END is %d but we never saw a BRIDGE_VLAN_INFO_RANGE_BEGIN" % vlan_id)
                         range_begin_vlan_id = vlan_id
 
-                    for x in xrange(range_begin_vlan_id, vlan_id + 1):
+                    for x in range(range_begin_vlan_id, vlan_id + 1):
                         print("  %10s  %4d  %s" % (ifname, x, vlan_flag_to_string(vlan_flag)))
                         ifname = ''
 
