@@ -94,7 +94,7 @@ class NetlinkListener(Thread):
         # The RX socket is used to listen to all netlink messages that fly by
         # as things change in the kernel. We need a very large SO_RCVBUF here
         # else we tend to miss messages.
-        # PID_MAX_LIMIT is 2^22 allowing 1024 sockets per-pid. We default to 
+        # PID_MAX_LIMIT is 2^22 allowing 1024 sockets per-pid. We default to
         # use 2 in the upper space (top 10 bits) instead of 0 to avoid conflicts
         # with the netlink manager which always attempts to bind with the pid.
         self.rx_socket = socket.socket(socket.AF_NETLINK, socket.SOCK_RAW, 0)
@@ -140,7 +140,7 @@ class NetlinkListener(Thread):
 
                 try:
                     data = s.recv(4096)
-                except socket.error, e:
+                except socket.error as e:
                     log.error('recv() error: ' + str(e))
                     data = []
                     if e.errno is errno.ENOBUFS and self.error_notification:

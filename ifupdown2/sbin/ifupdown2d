@@ -161,7 +161,7 @@ class Daemon:
             import ifupdown2.ifupdownaddons.modulebase
             import ifupdown2.ifupdownaddons.systemutils
             import ifupdown2.ifupdownaddons.utilsbase
-        except ImportError, e:
+        except ImportError as e:
             raise ImportError('%s - required module not found' % str(e))
 
     @staticmethod

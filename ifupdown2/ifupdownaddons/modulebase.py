@@ -145,7 +145,7 @@ class moduleBase(object):
             try:
                 if re.search(expr + '$', proc_ifacename):
                     yield proc_ifacename
-            except Exception, e:
+            except Exception as e:
                 raise Exception('%s: error searching regex \'%s\' in %s (%s)'
                                 %(ifacename, expr, proc_ifacename, str(e)))
         if not ifacenames:
@@ -154,7 +154,7 @@ class moduleBase(object):
             try:
                 if re.search(expr + '$', ifacename):
                     yield ifacename
-            except Exception, e:
+            except Exception as e:
                 raise Exception('%s: error searching regex \'%s\' in %s (%s)'
                                 %(ifacename, expr, ifacename, str(e)))
 
@@ -279,7 +279,7 @@ class moduleBase(object):
                 return 0
             with open(filename, 'w') as f:
                 f.write(strexpr)
-        except IOError, e:
+        except IOError as e:
             self.logger.warn('error writing to file %s'
                 %filename + '(' + str(e) + ')')
             return -1
@@ -422,7 +422,7 @@ class moduleBase(object):
             (s, e) = utils.exec_command(get_resvvlan).strip('\n').split('-')
             start = int(s)
             end = int(e)
-        except Exception, e:
+        except Exception as e:
             self.logger.debug('%s failed (%s)' %(get_resvvlan, str(e)))
             # ignore errors
             pass
