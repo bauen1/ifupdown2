@@ -2597,7 +2597,7 @@ class NetlinkPacket(object):
     def build_message(self, seq, pid):
         self.seq = seq
         self.pid = pid
-        attrs = ''
+        attrs = b''
 
         for attr in self.attributes.values():
             attrs += attr.encode()
