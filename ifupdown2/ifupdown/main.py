@@ -116,7 +116,7 @@ class Ifupdown2:
         with open(IFUPDOWN2_CONF_PATH, 'r') as f:
             config = f.read()
         configStr = '[ifupdown2]\n' + config
-        configFP = StringIO.StringIO(configStr)
+        configFP = StringIO(configStr)
         parser = configparser.RawConfigParser()
         parser.readfp(configFP)
         configmap_g = dict(parser.items('ifupdown2'))
