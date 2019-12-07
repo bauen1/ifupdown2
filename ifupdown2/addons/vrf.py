@@ -859,9 +859,9 @@ class vrf(moduleBase):
                     try:
                         os.setsid()
                         self.logger.info("%s: ifreload continuing in the background" %ifacename)
-                    except OSError as (err_no, err_message):
-                        self.logger.info("os.setsid failed: errno=%d: %s" % (err_no, err_message))
-                        self.logger.info("pid=%d  pgid=%d" % (os.getpid(), os.getpgid(0)))
+                    except OSError as e:
+                        self.logger.info("os.setsid failed: errno={:d}: {:s}".format(e.errno, e.strerror))
+                        self.logger.info("pid={:d}  pgid={:3}".format(os.getpid(), os.getpgid(0)))
                 try:
                     self.logger.info("%s: killing our session: %s"
                                      %(ifacename, str(proc)))
