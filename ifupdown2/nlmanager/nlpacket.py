@@ -847,7 +847,7 @@ class AttributeIFLA_AF_SPEC(Attribute):
 
                         # 1 byte attr
                         if inet6_attr_type == Link.IFLA_INET6_ADDR_GEN_MODE:
-                            inet6_attr[inet6_attr_type] = unpack('=B', sub_attr_data[4])[0]
+                            inet6_attr[inet6_attr_type] = unpack('=B', sub_attr_data[3:4])[0]
                             # nlmanager doesn't support multiple kernel version
                             # all the other attributes like IFLA_INET6_CONF are
                             # based on DEVCONF_MAX from _UAPI_IPV6_H.
@@ -1622,7 +1622,7 @@ class AttributeIFLA_LINKINFO(Attribute):
                                                       Link.IFLA_BRPORT_DUAL_LINK,
                                                       Link.IFLA_BRPORT_ARP_SUPPRESS,
                                                       Link.IFLA_BRPORT_DOWN_PEERLINK_REDIRECT):
-                                    ifla_info_slave_data[info_data_type] = unpack('=B', sub_attr_data[4])[0]
+                                    ifla_info_slave_data[info_data_type] = unpack('=B', sub_attr_data[3:4])[0]
 
                                 # 2 bytes
                                 elif info_data_type in (Link.IFLA_BRPORT_PRIORITY,
@@ -1647,7 +1647,7 @@ class AttributeIFLA_LINKINFO(Attribute):
                                         Link.IFLA_BOND_SLAVE_AD_ACTOR_OPER_PORT_STATE,
                                         Link.IFLA_BOND_SLAVE_AD_RX_BYPASS,
                                 ):
-                                    ifla_info_slave_data[info_data_type] = unpack('=B', sub_attr_data[4])[0]
+                                    ifla_info_slave_data[info_data_type] = unpack('=B', sub_attr_data[3:4])[0]
 
                                 # 2 bytes
                                 elif info_data_type in (
@@ -1748,7 +1748,7 @@ class AttributeIFLA_LINKINFO(Attribute):
                                                         Link.IFLA_VXLAN_REMCSUM_TX,
                                                         Link.IFLA_VXLAN_REMCSUM_RX,
                                                         Link.IFLA_VXLAN_REPLICATION_TYPE):
-                                    self.value[Link.IFLA_INFO_DATA][info_data_type] = unpack('=B', sub_attr_data[4])[0]
+                                    self.value[Link.IFLA_INFO_DATA][info_data_type] = unpack('=B', sub_attr_data[3:4])[0]
 
                                 else:
                                     # sub_attr_end = padded_length(sub_attr_length)
@@ -1778,7 +1778,7 @@ class AttributeIFLA_LINKINFO(Attribute):
                                                         Link.IFLA_BOND_AD_LACP_BYPASS,
                                                         Link.IFLA_BOND_XMIT_HASH_POLICY,
                                                         Link.IFLA_BOND_NUM_PEER_NOTIF):
-                                    self.value[Link.IFLA_INFO_DATA][info_data_type] = unpack('=B', sub_attr_data[4])[0]
+                                    self.value[Link.IFLA_INFO_DATA][info_data_type] = unpack('=B', sub_attr_data[3:4])[0]
 
                                 # 2-bytes int
                                 elif info_data_type == Link.IFLA_BOND_AD_ACTOR_SYS_PRIO:
@@ -1856,7 +1856,7 @@ class AttributeIFLA_LINKINFO(Attribute):
                                                         Link.IFLA_BR_MCAST_STATS_ENABLED,
                                                         Link.IFLA_BR_MCAST_IGMP_VERSION,
                                                         Link.IFLA_BR_MCAST_MLD_VERSION):
-                                    self.value[Link.IFLA_INFO_DATA][info_data_type] = unpack('=B', sub_attr_data[4])[0]
+                                    self.value[Link.IFLA_INFO_DATA][info_data_type] = unpack('=B', sub_attr_data[3:4])[0]
                                 else:
                                     self.log.log(SYSLOG_EXTRA_DEBUG, 'Add support for decoding IFLA_INFO_KIND bridge type %s (%d), length %d, padded to %d' %
                                                 (parent_msg.get_ifla_br_string(info_data_type), info_data_type, info_data_length, info_data_end))
@@ -1870,7 +1870,7 @@ class AttributeIFLA_LINKINFO(Attribute):
 
                                 # 1-byte
                                 if info_data_type in (Link.IFLA_GRE_TTL, Link.IFLA_GRE_TOS, Link.IFLA_GRE_PMTUDISC):
-                                    self.value[Link.IFLA_INFO_DATA][info_data_type] = unpack('=B', sub_attr_data[4])[0]
+                                    self.value[Link.IFLA_INFO_DATA][info_data_type] = unpack('=B', sub_attr_data[3:4])[0]
 
                                 # 2-bytes
                                 elif info_data_type in (
@@ -1905,7 +1905,7 @@ class AttributeIFLA_LINKINFO(Attribute):
 
                                 # 1-byte
                                 if info_data_type in (Link.IFLA_IPTUN_TTL, Link.IFLA_IPTUN_TOS, Link.IFLA_IPTUN_PMTUDISC):
-                                    self.value[Link.IFLA_INFO_DATA][info_data_type] = unpack('=B', sub_attr_data[4])[0]
+                                    self.value[Link.IFLA_INFO_DATA][info_data_type] = unpack('=B', sub_attr_data[3:4])[0]
 
                                 # 2-bytes
                                 elif info_data_type in (Link.IFLA_IPTUN_ENCAP_TYPE, Link.IFLA_IPTUN_ENCAP_SPORT, Link.IFLA_IPTUN_ENCAP_DPORT, Link.IFLA_IPTUN_ENCAP_FLAGS):
