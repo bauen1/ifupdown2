@@ -1091,7 +1091,7 @@ class bridge(moduleBase):
                     %(ifaceobj.name, str(e)))
 
     def _ints_to_ranges(self, ints):
-        for a, b in itertools.groupby(enumerate(ints), lambda (x, y): y - x):
+        for a, b in itertools.groupby(enumerate(ints), lambda x, y: y - x):
             b = list(b)
             yield b[0][1], b[-1][1]
 
